@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Heroe} from "../interfaces/heroe.interface";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class HeroesService {
   /**
    * Obtencion de los heroes por REST
    */
-  getHeroes() {
-    return this.http.get('http://localhost:3000/heroes')
+  getHeroes(): Observable<Heroe[]> {
+    return this.http.get<Heroe[]>('http://localhost:3000/heroes');
   }
 }
