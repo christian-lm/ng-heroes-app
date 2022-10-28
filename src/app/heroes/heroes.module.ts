@@ -8,6 +8,8 @@ import {ListadoComponent} from './pages/listado/listado.component';
 import {HeroesRoutingModule} from "./heroes-routing.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MaterialModule} from "../material/material.module";
+import {HeroesTarjetaComponent} from './components/heroes-tarjeta/heroes-tarjeta.component';
+import {ImagenPipe} from './pipes/imagen.pipe';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {MaterialModule} from "../material/material.module";
     BuscarComponent,
     HeroeComponent,
     HomeComponent,
-    ListadoComponent
+    ListadoComponent,
+    HeroesTarjetaComponent,
+    ImagenPipe
   ],
   imports: [
     CommonModule,
