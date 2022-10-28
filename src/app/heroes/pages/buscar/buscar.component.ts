@@ -1,15 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
+import {Heroe} from "../../interfaces/heroe.interface";
+import {HeroesService} from "../../services/heroes.service";
+import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.component.html'
 })
-export class BuscarComponent implements OnInit {
+export class BuscarComponent {
 
-  constructor() {
+  termino: string = "";
+  heroes!: Heroe[];
+  heroeSeleccionado!: Heroe;
+
+  constructor(private heroeService: HeroesService) {
   }
 
-  ngOnInit(): void {
+  buscando() {
+    this.heroeService.getHeroesPorTermino(this.termino)
+      .subscribe(heroes => {
+        this.heroes = heroes;
+      });
   }
 
+  opcionSeleccionada(event: MatAutocompleteSelectedEvent) {
+    const heroe: Heroe = event.option.value;
+    this.termino = heroe.superhero;
+
+    this.heroeService.getHeroePorID(heroe.id!)
+      .subscribe(heroe => {
+        this.heroeSeleccionado = heroe;
+      })
+  }
 }
