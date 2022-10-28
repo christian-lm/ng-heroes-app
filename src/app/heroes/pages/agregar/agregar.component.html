@@ -1,1 +1,63 @@
-<p>add works!</p>
+<h1>Nuevo heroes <small>Nuevo</small></h1>
+
+<div fxLayout="row" fxLayoutGap="40px">
+
+  <div fxFlex="50" fxLayout="column">
+
+    <div fxLayoutGap="20px">
+      <mat-form-field fxFlex="100">
+        <mat-label>Super Héroe</mat-label>
+        <input matInput
+               type="text"
+               required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Alter Ego</mat-label>
+        <input matInput
+               type="text"
+               required>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>Primera aparicion</mat-label>
+      <input matInput
+             type="text"
+             required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Personajes</mat-label>
+      <input matInput
+             type="text"
+             required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Creador</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let publisher of publishers">{{publisher.desc}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Foto URL</mat-label>
+      <input matInput
+             type="url"
+             required>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary">
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+  </div>
+
+  <div fxFlex="50">
+    <img [src]="heroe | imagen" alt="">
+  </div>
+
+</div>
