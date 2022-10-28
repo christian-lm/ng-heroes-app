@@ -24,12 +24,16 @@ export class BuscarComponent {
   }
 
   opcionSeleccionada(event: MatAutocompleteSelectedEvent) {
-    const heroe: Heroe = event.option.value;
-    this.termino = heroe.superhero;
+    const value = event.option.value;
 
-    this.heroeService.getHeroePorID(heroe.id!)
-      .subscribe(heroe => {
-        this.heroeSeleccionado = heroe;
-      })
+    if (value) {
+      const heroe: Heroe = value;
+      this.termino = heroe.superhero;
+
+      this.heroeService.getHeroePorID(heroe.id!)
+        .subscribe(heroe => {
+          this.heroeSeleccionado = heroe;
+        })
+    }
   }
 }

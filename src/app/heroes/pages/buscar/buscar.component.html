@@ -4,13 +4,14 @@
     <mat-divider></mat-divider>
   </div>
 
-  <div>
+  <div fxLayout="column">
     <h3>Buscador</h3>
 
     <mat-form-field>
 
       <input type="text"
              matInput
+             placeholder="Busca un heroe"
              [(ngModel)]="termino"
              [matAutocomplete]="auto"
              (input)="buscando()">
@@ -19,6 +20,9 @@
         <mat-option *ngFor="let heroe of heroes" [value]="heroe">
           {{heroe.superhero}}
         </mat-option>
+
+        <mat-option *ngIf="termino || ( heroes && heroes.length === 0)" [value]=" ">No se encontro nada
+          con {{termino}}</mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
