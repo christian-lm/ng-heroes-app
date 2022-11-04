@@ -3,6 +3,9 @@ import {Heroe, Publisher} from "../../interfaces/heroe.interface";
 import {HeroesService} from "../../services/heroes.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmarComponent} from "../../components/confirmar/confirmar.component";
 
 @Component({
   selector: 'app-add',
@@ -40,7 +43,9 @@ export class AgregarComponent implements OnInit {
 
   constructor(private heroeService: HeroesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -67,21 +72,39 @@ export class AgregarComponent implements OnInit {
     if (this.heroe.id != null) {
       this.heroeService.actualizarHeroe(this.heroe)
         .subscribe(resp => {
-          console.log('Respuesta: ', resp);
+          this.mostrarSnackbar("Registro actualizado");
         })
     } else {
       this.heroeService.agregarHeroe(this.heroe)
         .subscribe(heroe => {
           this.router.navigate(['/heroes/editar', heroe.id])
+          this.mostrarSnackbar("Registro creado");
         })
     }
   }
 
   // Metodo borrar
   borrar() {
-    this.heroeService.deleteHeroe(this.heroe.id!)
-      .subscribe(resp => {
-        this.router.navigate(['/heroes']);
+
+    const dialogRef = this.dialog.open(ConfirmarComponent, {
+      width: '500px',
+      data: {...this.heroe}
+    });
+
+    dialogRef.afterClosed()
+      .subscribe((resp) => {
+        if (resp) {
+          this.heroeService.deleteHeroe(this.heroe.id!)
+            .subscribe(resp => {
+              this.router.navigate(['/heroes']);
+            })
+        }
       })
+  }
+
+  mostrarSnackbar(mensaje: string) {
+    this.snackBar.open(mensaje, "Cerrar", {
+      duration: 2500
+    });
   }
 }

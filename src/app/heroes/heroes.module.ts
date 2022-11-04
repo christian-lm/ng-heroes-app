@@ -11,6 +11,7 @@ import {MaterialModule} from "../material/material.module";
 import {HeroesTarjetaComponent} from './components/heroes-tarjeta/heroes-tarjeta.component';
 import {ImagenPipe} from './pipes/imagen.pipe';
 import {FormsModule} from "@angular/forms";
+import {ConfirmarComponent} from './components/confirmar/confirmar.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {FormsModule} from "@angular/forms";
     HomeComponent,
     ListadoComponent,
     HeroesTarjetaComponent,
-    ImagenPipe
+    ImagenPipe,
+    ConfirmarComponent
   ],
   imports: [
     CommonModule,
