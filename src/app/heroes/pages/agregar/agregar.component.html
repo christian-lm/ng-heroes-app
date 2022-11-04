@@ -1,14 +1,17 @@
 <h1>Nuevo heroes <small>Nuevo</small></h1>
 
-<div fxLayout="row" fxLayoutGap="40px">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="40px">
 
   <div fxFlex="50" fxLayout="column">
 
-    <div fxLayoutGap="20px">
-      <mat-form-field fxFlex="100">
+    <div fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutGap="20px">
+      <mat-form-field fxFlex="100" fxLayout.xs="column">
         <mat-label>Super Héroe</mat-label>
         <input matInput
                type="text"
+               [(ngModel)]="heroe.superhero"
                required>
       </mat-form-field>
 
@@ -16,6 +19,7 @@
         <mat-label>Alter Ego</mat-label>
         <input matInput
                type="text"
+               [(ngModel)]="heroe.alter_ego"
                required>
       </mat-form-field>
     </div>
@@ -24,6 +28,7 @@
       <mat-label>Primera aparicion</mat-label>
       <input matInput
              type="text"
+             [(ngModel)]="heroe.first_appearance"
              required>
     </mat-form-field>
 
@@ -31,13 +36,17 @@
       <mat-label>Personajes</mat-label>
       <input matInput
              type="text"
+             [(ngModel)]="heroe.characters"
              required>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Creador</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let publisher of publishers">{{publisher.desc}}</mat-option>
+      <mat-select [(ngModel)]="heroe.publisher"
+                  required>
+        <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+          {{publisher.desc}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -45,12 +54,13 @@
       <mat-label>Foto URL</mat-label>
       <input matInput
              type="url"
+             [(ngModel)]="heroe.alt_img"
              required>
     </mat-form-field>
 
     <br>
 
-    <button mat-raised-button color="primary">
+    <button mat-raised-button color="primary" (click)="guardar()">
       <mat-icon>save</mat-icon>
       Guardar
     </button>
